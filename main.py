@@ -1,16 +1,24 @@
 import tkinter as tk
+from appUtils import Recorder as recorder
+from apis import ChatGPTAPI as chat 
+from apis import VoiceToTextConverter as vtt
 
-# Create the main window
-root = tk.Tk()
-root.title("Personal Note Taker")  # Set window title
+class App:
+    def __init__(self, root):
+        self.recorder = recorder()  # Create an instance of Recorder
+        self.chat = chat(9)
+        self.vtt = vtt(9)
 
-# Add a label
-label = tk.Label(root, text="Welcome Press record to start recording", font=("Arial", 16))
-label.pack(pady=20)  # Add some padding
+        label = tk.Label(root, text="Hello, Tkinter!")
+        self.recorder.setLabel = label
+        label.pack()
+        # Button uses the record method from recorder instance as command
+        button = tk.Button(root, text="Record", command=self.recorder.startRecording)
+        button.pack()
 
-# Add a button
-button = tk.Button(root, text="Record", command=lambda: label.config(text="Hello, Tkinter!"))
-button.pack(pady=20)  # Add some padding
 
-# Start the main event loop
-root.mainloop()
+# Initialize Tkinter and run the app
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = App(root)
+    root.mainloop()
