@@ -1,16 +1,19 @@
 import tkinter as tk
+import Recorder as recorder
 
-recording = False
+recording = recorder.Recorder().getRecordingStatus
 
 def button_click(e):
     global recording
     if recording:
         label.config(text="Press the Button to Record")
         recording = False
+        recorder.Recorder().setRecordingStatus(False)
         canvas.itemconfig(button_shape, fill="red")
     else:
         label.config(text="Recording...")
         recording = True
+        recorder.Recorder().setRecordingStatus(False)
         canvas.itemconfig(button_shape, fill="blue")
 
 root = tk.Tk()

@@ -6,7 +6,14 @@ class Recorder:
     def __init__(self):
         self.r = sr.Recognizer()
         self.textList = []
-        self.full_text = ""    
+        self.full_text = ""
+        self.recordingStatus = False    
+    
+    def getRecordingStatus(self):
+        return self.recordingStatus
+    
+    def setRecordingStatus(self, status):
+        self.recordingStatus = status
     
     def save_text_to_file(self, filename="recorded_text.txt"):
         # Save the recognized text to a file.
@@ -25,8 +32,8 @@ class Recorder:
     def RecordAndConvertToText(self):
         
         try:
-            # Infinite loop to keep recording continuously
-            while True:  
+            # Infinite loop to keep recording continuously as long as recordingStatus is True.
+            while self.recordingStatus:  
                 with sr.Microphone() as source:
                     print("Recording will start now")
                     audio = self.r.listen(source)
@@ -35,7 +42,7 @@ class Recorder:
                     # to use another API key, use `r.recognize_google(audio, key="GOOGLE_SPEECH_RECOGNITION_API_KEY")`
                     # instead of `r.recognize_google(audio)`
                     currentLine = self.r.recognize_google(audio)
-                    print("Google Speech Recognition thinks you said " + currentLine)
+                    print("Google Speech Recognition thinks you said and it has been added to the total list" + currentLine)
                     self.textList.append(currentLine)
                 except sr.UnknownValueError:
                     print("Google Speech Recognition could not understand audio")
