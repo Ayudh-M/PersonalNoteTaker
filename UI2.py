@@ -5,7 +5,7 @@ recording = recorder.Recorder().getRecordingStatus
 
 def button_click(e):
     global recording
-    if recording:
+    if not recording:
         label.config(text="Press the Button to Record")
         recording = False
         recorder.Recorder().setRecordingStatus(False)
@@ -13,7 +13,8 @@ def button_click(e):
     else:
         label.config(text="Recording...")
         recording = True
-        recorder.Recorder().setRecordingStatus(False)
+        recorder.Recorder().setRecordingStatus(True)
+        recorder.Recorder().RecordAndConvertToText()
         canvas.itemconfig(button_shape, fill="blue")
 
 root = tk.Tk()
