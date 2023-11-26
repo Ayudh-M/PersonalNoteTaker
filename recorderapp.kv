@@ -1,0 +1,24 @@
+<RecorderApp>:
+    layout: layout
+    BoxLayout:
+        id: layout
+        orientation: 'vertical'
+        padding: 50
+        spacing: 10
+
+        Button:
+            text: 'Start Recording'
+            on_press: app.toggle_recording()
+            size_hint: (0.5, 0.1)
+            pos_hint: {'center_x': 0.5}
+            background_normal: ''
+            background_color: 0.1, 0.5, 0.6, 1
+            background_down: ''
+            background_color_down: 0.1, 0.5, 0.6, 0.8
+
+        TextInput:
+            id: text_display
+            readonly: True
+            size_hint_y: None
+            height: self.minimum_height
+            background_color: (1, 1, 1, 1)

@@ -1,6 +1,8 @@
 import tkinter as tk
 import speech_recognition as sr
 
+
+
 # Does both the recording and the speech recognition.
 class Recorder:
     def __init__(self):
